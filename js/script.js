@@ -107,7 +107,7 @@ form.addEventListener('submit', e => {
 
 const t = {
   es: {
-    'nav.resolve':'Tus retos','nav.solutions':'Soluciones','nav.why':'Por qué Virtus','nav.method':'Metodología','nav.diagnosis':'Diagnóstico',
+    'nav.home':'Inicio','nav.resolve':'Tus retos','nav.solutions':'Soluciones','nav.why':'Por qué Virtus','nav.method':'Metodología','nav.diagnosis':'Diagnóstico',
     'transition.lead':'Tu reto financiero','transition.title':'es el punto de partida.','transition.credit':'Crédito','transition.flow':'Flujo','transition.capital':'Capital','transition.fx':'Riesgo FX','transition.control':'Control',
     'hero.eyebrow':'HUB DE INGENIERÍA FINANCIERA','hero.line1':'Protegemos tu liquidez.','hero.line2':'Reducimos tu riesgo.','hero.line3':'Impulsamos tu crecimiento.','hero.body':'Liquidez, financiamiento, gestión de riesgos y consultoría para empresas que necesitan decisiones financieras de alto nivel.',
     'cta.diagnosis':'Solicitar diagnóstico','cta.solutions':'Ver soluciones','pillars.liquidity':'Liquidez','pillars.protection':'Protección','pillars.growth':'Crecimiento',
@@ -125,7 +125,7 @@ const t = {
     'form.name':'Nombre','form.company':'Empresa','form.email':'Correo','form.phone':'Teléfono','form.need':'¿Qué necesita resolver?','form.choose':'Selecciona una opción','form.o1':'Liquidez / Financiamiento','form.o2':'Riesgo cambiario / Mercado','form.o3':'Consultoría empresarial','form.o4':'Otro','form.billing':'Facturación aproximada','form.billingPlaceholder':'Indica una cifra o rango aproximado','form.privacy':'Acepto que mis datos sean utilizados para dar seguimiento a mi solicitud. El aviso de privacidad definitivo deberá vincularse antes de publicar.','form.submit':'Solicitar diagnóstico financiero','footer.tagline':'HUB de ingeniería financiera.'
   },
   en: {
-    'nav.resolve':'Challenges','nav.solutions':'Solutions','nav.why':'Why Virtus','nav.method':'Methodology','nav.diagnosis':'Assessment',
+    'nav.home':'Home','nav.resolve':'Challenges','nav.solutions':'Solutions','nav.why':'Why Virtus','nav.method':'Methodology','nav.diagnosis':'Assessment',
     'transition.lead':'Your financial challenge','transition.title':'is the starting point.','transition.credit':'Credit','transition.flow':'Cash flow','transition.capital':'Capital','transition.fx':'FX risk','transition.control':'Control',
     'hero.eyebrow':'FINANCIAL ENGINEERING HUB','hero.line1':'We protect your liquidity.','hero.line2':'We reduce your risk.','hero.line3':'We drive your growth.','hero.body':'Liquidity, financing, risk management and consulting for companies that need high-level financial decisions.',
     'cta.diagnosis':'Request an assessment','cta.solutions':'View solutions','pillars.liquidity':'Liquidity','pillars.protection':'Protection','pillars.growth':'Growth',
