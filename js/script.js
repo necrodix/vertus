@@ -8,7 +8,12 @@ const form = $('#diagnosisForm');
 const status = $('#formStatus');
 const langToggle = $('#langToggle');
 
-window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+const updateHeaderState = () => header.classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll', updateHeaderState, { passive: true });
+window.addEventListener('hashchange', () => window.requestAnimationFrame(updateHeaderState));
+window.addEventListener('pageshow', () => window.requestAnimationFrame(updateHeaderState));
+window.addEventListener('load', () => window.requestAnimationFrame(updateHeaderState));
+updateHeaderState();
 
 const hero = $('.hero');
 const heroMedia = $('.hero-media', hero);
