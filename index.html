@@ -16,8 +16,7 @@
   <header class="site-header" id="siteHeader">
     <div class="container nav-wrap">
       <a class="brand" href="#inicio" aria-label="Virtus Advisory Partners - Inicio">
-        <span class="brand-mark" aria-hidden="true">V</span>
-        <span class="brand-copy"><strong>VIRTUS</strong><small>ADVISORY PARTNERS</small></span>
+        <img class="brand-logo" src="images/LOGO.jpeg" alt="Virtus Advisory Partners">
       </a>
 
       <button class="menu-toggle" id="menuToggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
@@ -26,12 +25,31 @@
 
       <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
         <a href="#inicio" data-i18n="nav.home">Inicio</a>
-        <a href="#resolver" data-i18n="nav.challenges">Tus retos</a>
-        <a href="#que-resolvemos" data-i18n="nav.resolve">Qué resolvemos</a>
-        <a href="#soluciones" data-i18n="nav.solutions">Soluciones</a>
+        <div class="nav-group">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="solutionsMenu">
+            <span data-i18n="nav.solutions">Soluciones</span><span class="nav-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="submenu" id="solutionsMenu">
+            <a href="#soluciones" data-i18n="nav.solutionsOverview">Vista general de soluciones</a>
+            <a href="#liquidez" data-i18n="nav.liquidity">Liquidez &amp; Financiamiento</a>
+            <a href="#riesgos" data-i18n="nav.risk">Gestión Estratégica de Riesgos</a>
+            <a href="#consultoria" data-i18n="nav.consulting">Consultoría Empresarial Integral</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="aboutMenu">
+            <span data-i18n="nav.about">Quiénes somos</span><span class="nav-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="submenu" id="aboutMenu">
+            <a href="#quienes-somos" data-i18n="nav.aboutOverview">Quiénes somos</a>
+            <a href="#mision" data-i18n="nav.mission">Misión</a>
+            <a href="#vision" data-i18n="nav.vision">Visión</a>
+            <a href="#valores" data-i18n="nav.values">Nuestros valores</a>
+          </div>
+        </div>
         <a href="#virtus" data-i18n="nav.why">Por qué Virtus</a>
         <a href="#metodologia" data-i18n="nav.method">Metodología</a>
-        <a class="nav-cta" href="#diagnostico" data-i18n="nav.diagnosis">Diagnóstico</a>
+        <a class="nav-cta" href="#diagnostico" data-i18n="nav.diagnosis">Solicitar diagnóstico</a>
         <button class="lang-toggle" id="langToggle" type="button" aria-label="Cambiar idioma">EN</button>
       </nav>
     </div>
@@ -43,7 +61,6 @@
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <div class="eyebrow" data-i18n="hero.eyebrow">HUB DE INGENIERÍA FINANCIERA</div>
           <h1 id="heroTitle">
             <span data-i18n="hero.line1">Protegemos tu liquidez.</span>
             <span data-i18n="hero.line2">Reducimos tu riesgo.</span>
@@ -54,6 +71,7 @@
             <a class="btn btn-primary" href="#diagnostico" data-i18n="cta.diagnosis">Solicitar diagnóstico</a>
             <a class="btn btn-ghost" href="#soluciones" data-i18n="cta.solutions">Ver soluciones</a>
           </div>
+          <a class="hero-path-link" href="#que-resolvemos"><span data-i18n="cta.challenges">¿Qué necesita resolver tu empresa?</span><span aria-hidden="true">↓</span></a>
         </div>
       </div>
       <div class="hero-pillars" aria-label="Pilares Virtus">
@@ -94,6 +112,9 @@
           <a class="problem-card" id="reto-capital" href="#liquidez"><span class="index">03</span><h3 data-i18n="resolve.card3.title">Necesitas capital de trabajo</h3><p data-i18n="resolve.card3.body">Diseñamos estructura para fortalecer liquidez operativa.</p><span class="arrow">→</span></a>
           <a class="problem-card" id="reto-fx" href="#riesgos"><span class="index">04</span><h3 data-i18n="resolve.card4.title">El tipo de cambio afecta tus márgenes</h3><p data-i18n="resolve.card4.body">Evaluamos coberturas para reducir exposición cambiaria.</p><span class="arrow">→</span></a>
           <a class="problem-card" id="reto-control" href="#consultoria"><span class="index">05</span><h3 data-i18n="resolve.card5.title">Necesitas mayor control financiero</h3><p data-i18n="resolve.card5.body">Integramos finanzas, fiscal, contabilidad, auditoría y control.</p><span class="arrow">→</span></a>
+        </div>
+        <div class="problem-actions reveal">
+          <a class="btn btn-dark" href="#soluciones" data-i18n="cta.solutions">Ver soluciones</a>
         </div>
       </div>
     </section>
@@ -145,6 +166,44 @@
           <div class="hub-step"><img src="images/icons/SVG/05_estrategia.svg" alt=""><span>02</span><strong data-i18n="hub.step2">Estructuramos</strong><small data-i18n="hub.step2body">La estructura financiera adecuada.</small></div>
           <div class="hub-step"><img src="images/icons/SVG/06_implementacion.svg" alt=""><span>03</span><strong data-i18n="hub.step3">Negociamos</strong><small data-i18n="hub.step3body">Con instituciones y aliados especializados.</small></div>
           <div class="hub-step"><img src="images/icons/SVG/07_seguimiento.svg" alt=""><span>04</span><strong data-i18n="hub.step4">Implementamos</strong><small data-i18n="hub.step4body">Con seguimiento y ajustes continuos.</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="quienes-somos" aria-labelledby="aboutTitle">
+      <div class="container">
+        <div class="about-intro reveal">
+          <span class="eyebrow dark" data-i18n="about.eyebrow">QUIÉNES SOMOS</span>
+          <h2 id="aboutTitle" data-i18n="about.title">Criterio financiero para transformar riesgos en oportunidades.</h2>
+          <p data-i18n="about.body">Virtus Advisory Partners integra experiencia en financiamiento, tesorería, riesgos y consultoría para diseñar y ejecutar soluciones con visión de largo plazo.</p>
+        </div>
+        <div class="purpose-grid">
+          <article class="purpose-card reveal" id="mision">
+            <span>01</span>
+            <h3 data-i18n="about.mission">Misión</h3>
+            <p data-i18n="about.missionBody">Diseñar soluciones financieras estratégicas que protejan la operación, fortalezcan la liquidez y habiliten el crecimiento de nuestros clientes.</p>
+          </article>
+          <article class="purpose-card reveal" id="vision">
+            <span>02</span>
+            <h3 data-i18n="about.vision">Visión</h3>
+            <p data-i18n="about.visionBody">Ser el HUB de ingeniería financiera de referencia para empresas que buscan decisiones sólidas, acompañamiento experto y resultados sostenibles.</p>
+          </article>
+        </div>
+        <div class="values-block" id="valores">
+          <div class="values-heading reveal">
+            <span class="eyebrow dark" data-i18n="about.valuesEyebrow">NUESTROS VALORES</span>
+            <h2 data-i18n="about.valuesTitle">Cuatro pilares que orientan cada decisión.</h2>
+          </div>
+          <div class="values-grid">
+            <article class="value-card reveal"><span>01</span><h3 data-i18n="about.v1">Templanza</h3><p data-i18n="about.v1Body">Equilibrio y serenidad para decidir con claridad.</p></article>
+            <article class="value-card reveal"><span>02</span><h3 data-i18n="about.v2">Fortaleza</h3><p data-i18n="about.v2Body">Determinación para ejecutar incluso en escenarios complejos.</p></article>
+            <article class="value-card reveal"><span>03</span><h3 data-i18n="about.v3">Prudencia y sabiduría</h3><p data-i18n="about.v3Body">Análisis riguroso antes de recomendar y actuar.</p></article>
+            <article class="value-card reveal"><span>04</span><h3 data-i18n="about.v4">Justicia</h3><p data-i18n="about.v4Body">Integridad, transparencia y equilibrio en cada relación.</p></article>
+          </div>
+        </div>
+        <div class="about-actions reveal">
+          <a class="btn btn-primary" href="#diagnostico" data-i18n="cta.diagnosis">Solicitar diagnóstico</a>
+          <a class="btn btn-dark" href="#metodologia" data-i18n="hub.cta">Conoce cómo trabajamos</a>
         </div>
       </div>
     </section>

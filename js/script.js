@@ -34,7 +34,41 @@ menuToggle.addEventListener('click', () => {
   menuToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 });
 
+const submenuGroups = $$('.nav-group', mainNav);
+const closeSubmenus = (except = null) => {
+  submenuGroups.forEach(group => {
+    if (group === except) return;
+    group.classList.remove('is-open');
+    $('.nav-trigger', group)?.setAttribute('aria-expanded', 'false');
+  });
+};
+
+submenuGroups.forEach(group => {
+  const trigger = $('.nav-trigger', group);
+  trigger.addEventListener('click', event => {
+    event.stopPropagation();
+    const willOpen = !group.classList.contains('is-open');
+    closeSubmenus(group);
+    group.classList.toggle('is-open', willOpen);
+    trigger.setAttribute('aria-expanded', String(willOpen));
+  });
+});
+
+document.addEventListener('click', event => {
+  if (!mainNav.contains(event.target)) closeSubmenus();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeSubmenus();
+    mainNav.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.focus();
+  }
+});
+
 $$('#mainNav a').forEach(a => a.addEventListener('click', () => {
+  closeSubmenus();
   mainNav.classList.remove('open');
   menuToggle.setAttribute('aria-expanded', 'false');
 }));
@@ -107,14 +141,15 @@ form.addEventListener('submit', e => {
 
 const t = {
   es: {
-    'nav.home':'Inicio','nav.challenges':'Tus retos','nav.resolve':'Qué resolvemos','nav.solutions':'Soluciones','nav.why':'Por qué Virtus','nav.method':'Metodología','nav.diagnosis':'Diagnóstico',
+    'nav.home':'Inicio','nav.solutions':'Soluciones','nav.solutionsOverview':'Vista general de soluciones','nav.liquidity':'Liquidez & Financiamiento','nav.risk':'Gestión Estratégica de Riesgos','nav.consulting':'Consultoría Empresarial Integral','nav.about':'Quiénes somos','nav.aboutOverview':'Quiénes somos','nav.mission':'Misión','nav.vision':'Visión','nav.values':'Nuestros valores','nav.why':'Por qué Virtus','nav.method':'Metodología','nav.diagnosis':'Solicitar diagnóstico',
     'transition.lead':'Tu reto financiero','transition.title':'es el punto de partida.','transition.credit':'Crédito','transition.flow':'Flujo','transition.capital':'Capital','transition.fx':'Riesgo FX','transition.control':'Control',
-    'hero.eyebrow':'HUB DE INGENIERÍA FINANCIERA','hero.line1':'Protegemos tu liquidez.','hero.line2':'Reducimos tu riesgo.','hero.line3':'Impulsamos tu crecimiento.','hero.body':'Liquidez, financiamiento, gestión de riesgos y consultoría para empresas que necesitan decisiones financieras de alto nivel.',
-    'cta.diagnosis':'Solicitar diagnóstico','cta.solutions':'Ver soluciones','pillars.liquidity':'Liquidez','pillars.protection':'Protección','pillars.growth':'Crecimiento',
+    'hero.line1':'Protegemos tu liquidez.','hero.line2':'Reducimos tu riesgo.','hero.line3':'Impulsamos tu crecimiento.','hero.body':'Liquidez, financiamiento, gestión de riesgos y consultoría para empresas que necesitan decisiones financieras de alto nivel.',
+    'cta.diagnosis':'Solicitar diagnóstico','cta.solutions':'Ver soluciones','cta.challenges':'¿Qué necesita resolver tu empresa?','pillars.liquidity':'Liquidez','pillars.protection':'Protección','pillars.growth':'Crecimiento',
     'resolve.eyebrow':'PRIMERO, TU RETO','resolve.title':'¿Qué necesita resolver tu empresa?','resolve.body':'Identifica la situación que más se parece a tu realidad. Desde ahí te llevamos a la solución adecuada.',
     'resolve.card1.title':'El banco no autoriza tu crédito','resolve.card1.body':'Revisamos estructura, capacidad y alternativas de financiamiento.','resolve.card2.title':'Tu deuda de corto plazo presiona el flujo','resolve.card2.body':'Analizamos consolidación y reestructuración de pasivos.','resolve.card3.title':'Necesitas capital de trabajo','resolve.card3.body':'Diseñamos estructura para fortalecer liquidez operativa.','resolve.card4.title':'El tipo de cambio afecta tus márgenes','resolve.card4.body':'Evaluamos coberturas para reducir exposición cambiaria.','resolve.card5.title':'Necesitas mayor control financiero','resolve.card5.body':'Integramos finanzas, fiscal, contabilidad, auditoría y control.',
     'solutions.title':'Tres rutas. Una estrategia financiera integral.','solutions.body':'Profundiza en el eje que tu empresa necesita sin perder la visión completa del negocio.','solutions.s1.title':'Liquidez & Financiamiento','solutions.s1.body':'Capital de trabajo, pasivos, crédito empresarial, liquidez y líneas FX & Capital.','solutions.s2.title':'Gestión Estratégica de Riesgos','solutions.s2.body':'Divisas, forwards, opciones, derivados y estructuras avanzadas ante la volatilidad.','solutions.s3.title':'Consultoría Empresarial Integral','solutions.s3.body':'Finanzas, contabilidad, fiscal, auditoría, gobierno corporativo y control interno.','common.more':'Ver más →',
     'hub.title':'Tu HUB de ingeniería financiera','hub.lead':'Financiamiento + Tesorería + Riesgos + Consultoría integrados en una sola estrategia.','hub.body':'No vendemos productos. Diseñamos estructuras financieras y acompañamos su ejecución.','hub.cta':'Conoce cómo trabajamos','hub.step1':'Analizamos','hub.step1body':'Balance, flujo, deuda y exposición.','hub.step2':'Estructuramos','hub.step2body':'La estructura financiera adecuada.','hub.step3':'Negociamos','hub.step3body':'Con instituciones y aliados especializados.','hub.step4':'Implementamos','hub.step4body':'Con seguimiento y ajustes continuos.',
+    'about.eyebrow':'QUIÉNES SOMOS','about.title':'Criterio financiero para transformar riesgos en oportunidades.','about.body':'Virtus Advisory Partners integra experiencia en financiamiento, tesorería, riesgos y consultoría para diseñar y ejecutar soluciones con visión de largo plazo.','about.mission':'Misión','about.missionBody':'Diseñar soluciones financieras estratégicas que protejan la operación, fortalezcan la liquidez y habiliten el crecimiento de nuestros clientes.','about.vision':'Visión','about.visionBody':'Ser el HUB de ingeniería financiera de referencia para empresas que buscan decisiones sólidas, acompañamiento experto y resultados sostenibles.','about.valuesEyebrow':'NUESTROS VALORES','about.valuesTitle':'Cuatro pilares que orientan cada decisión.','about.v1':'Templanza','about.v1Body':'Equilibrio y serenidad para decidir con claridad.','about.v2':'Fortaleza','about.v2Body':'Determinación para ejecutar incluso en escenarios complejos.','about.v3':'Prudencia y sabiduría','about.v3Body':'Análisis riguroso antes de recomendar y actuar.','about.v4':'Justicia','about.v4Body':'Integridad, transparencia y equilibrio en cada relación.',
     'financing.title':'Capital inteligente para impulsar tu operación.','financing.i1':'Crédito empresarial','financing.i2':'Capital de trabajo','financing.i3':'Consolidación de pasivos','financing.i4':'Reestructuración','financing.i5':'Financiamiento operativo','financing.i6':'Líneas FX & Capital',
     'risk.title':'Blindamos tu empresa ante la volatilidad.','risk.i1':'Mercado de divisas','risk.i2':'Forwards y opciones','risk.i3':'Derivados financieros','risk.i4':'Estructuras avanzadas',
     'consulting.title':'Expertos que impulsan decisiones, orden y crecimiento.','consulting.i1':'Finanzas','consulting.i2':'Contabilidad','consulting.i3':'Fiscal','consulting.i4':'Auditoría','consulting.i5':'Gobierno corporativo','consulting.i6':'Control interno',
@@ -125,14 +160,15 @@ const t = {
     'form.name':'Nombre','form.company':'Empresa','form.email':'Correo','form.phone':'Teléfono','form.need':'¿Qué necesita resolver?','form.choose':'Selecciona una opción','form.o1':'Liquidez / Financiamiento','form.o2':'Riesgo cambiario / Mercado','form.o3':'Consultoría empresarial','form.o4':'Otro','form.billing':'Facturación aproximada','form.billingPlaceholder':'Indica una cifra o rango aproximado','form.privacy':'Acepto que mis datos sean utilizados para dar seguimiento a mi solicitud. El aviso de privacidad definitivo deberá vincularse antes de publicar.','form.submit':'Solicitar diagnóstico financiero','footer.tagline':'HUB de ingeniería financiera.'
   },
   en: {
-    'nav.home':'Home','nav.challenges':'Your challenges','nav.resolve':'What we solve','nav.solutions':'Solutions','nav.why':'Why Virtus','nav.method':'Methodology','nav.diagnosis':'Assessment',
+    'nav.home':'Home','nav.solutions':'Solutions','nav.solutionsOverview':'Solutions overview','nav.liquidity':'Liquidity & Financing','nav.risk':'Strategic Risk Management','nav.consulting':'Comprehensive Business Consulting','nav.about':'About us','nav.aboutOverview':'About us','nav.mission':'Mission','nav.vision':'Vision','nav.values':'Our values','nav.why':'Why Virtus','nav.method':'Methodology','nav.diagnosis':'Request assessment',
     'transition.lead':'Your financial challenge','transition.title':'is the starting point.','transition.credit':'Credit','transition.flow':'Cash flow','transition.capital':'Capital','transition.fx':'FX risk','transition.control':'Control',
-    'hero.eyebrow':'FINANCIAL ENGINEERING HUB','hero.line1':'We protect your liquidity.','hero.line2':'We reduce your risk.','hero.line3':'We drive your growth.','hero.body':'Liquidity, financing, risk management and consulting for companies that need high-level financial decisions.',
-    'cta.diagnosis':'Request an assessment','cta.solutions':'View solutions','pillars.liquidity':'Liquidity','pillars.protection':'Protection','pillars.growth':'Growth',
+    'hero.line1':'We protect your liquidity.','hero.line2':'We reduce your risk.','hero.line3':'We drive your growth.','hero.body':'Liquidity, financing, risk management and consulting for companies that need high-level financial decisions.',
+    'cta.diagnosis':'Request an assessment','cta.solutions':'View solutions','cta.challenges':'What does your company need to solve?','pillars.liquidity':'Liquidity','pillars.protection':'Protection','pillars.growth':'Growth',
     'resolve.eyebrow':'FIRST, YOUR CHALLENGE','resolve.title':'What does your company need to solve?','resolve.body':'Identify the situation closest to your reality. From there, we guide you to the right solution.',
     'resolve.card1.title':'The bank did not approve your credit','resolve.card1.body':'We review structure, capacity and financing alternatives.','resolve.card2.title':'Short-term debt is pressuring cash flow','resolve.card2.body':'We analyze liability consolidation and restructuring.','resolve.card3.title':'You need working capital','resolve.card3.body':'We design structures to strengthen operating liquidity.','resolve.card4.title':'FX is affecting your margins','resolve.card4.body':'We assess hedging strategies to reduce currency exposure.','resolve.card5.title':'You need stronger financial control','resolve.card5.body':'We integrate finance, tax, accounting, audit and controls.',
     'solutions.title':'Three paths. One integrated financial strategy.','solutions.body':'Explore the area your company needs without losing sight of the full business picture.','solutions.s1.title':'Liquidity & Financing','solutions.s1.body':'Working capital, liabilities, corporate credit, liquidity and FX & Capital lines.','solutions.s2.title':'Strategic Risk Management','solutions.s2.body':'FX, forwards, options, derivatives and advanced structures for volatile markets.','solutions.s3.title':'Integrated Business Consulting','solutions.s3.body':'Finance, accounting, tax, audit, corporate governance and internal control.','common.more':'Learn more →',
     'hub.title':'Your financial engineering HUB','hub.lead':'Financing + Treasury + Risk + Consulting integrated into one strategy.','hub.body':'We do not sell products. We design financial structures and support execution.','hub.cta':'See how we work','hub.step1':'Analyze','hub.step1body':'Balance sheet, cash flow, debt and exposure.','hub.step2':'Structure','hub.step2body':'The right financial structure.','hub.step3':'Negotiate','hub.step3body':'With institutions and specialized partners.','hub.step4':'Implement','hub.step4body':'With ongoing monitoring and adjustments.',
+    'about.eyebrow':'ABOUT US','about.title':'Financial judgment to transform risks into opportunities.','about.body':'Virtus Advisory Partners brings together expertise in financing, treasury, risk and consulting to design and execute solutions with a long-term perspective.','about.mission':'Mission','about.missionBody':'To design strategic financial solutions that protect operations, strengthen liquidity and enable our clients’ growth.','about.vision':'Vision','about.visionBody':'To be the leading financial engineering HUB for companies seeking sound decisions, expert guidance and sustainable results.','about.valuesEyebrow':'OUR VALUES','about.valuesTitle':'Four pillars that guide every decision.','about.v1':'Temperance','about.v1Body':'Balance and composure to make clear decisions.','about.v2':'Fortitude','about.v2Body':'Determination to execute even in complex scenarios.','about.v3':'Prudence and wisdom','about.v3Body':'Rigorous analysis before recommending and acting.','about.v4':'Justice','about.v4Body':'Integrity, transparency and balance in every relationship.',
     'financing.title':'Smart capital to power your operation.','financing.i1':'Corporate credit','financing.i2':'Working capital','financing.i3':'Liability consolidation','financing.i4':'Restructuring','financing.i5':'Operating financing','financing.i6':'FX & Capital lines',
     'risk.title':'We protect your company from volatility.','risk.i1':'Foreign exchange','risk.i2':'Forwards and options','risk.i3':'Financial derivatives','risk.i4':'Advanced structures',
     'consulting.title':'Experts who drive decisions, order and growth.','consulting.i1':'Finance','consulting.i2':'Accounting','consulting.i3':'Tax','consulting.i4':'Audit','consulting.i5':'Corporate governance','consulting.i6':'Internal control',
