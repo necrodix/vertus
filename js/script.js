@@ -7,8 +7,7 @@ const mainNav = $('#mainNav');
 const form = $('#diagnosisForm');
 const status = $('#formStatus');
 const langToggle = $('#langToggle');
-
-const updateHeaderState = () => header.classList.toggle('scrolled', window.scrollY > 40);
+const updateHeaderState = () => header?.classList.toggle('scrolled', window.scrollY > 40 || document.body.classList.contains('inner-page'));
 window.addEventListener('scroll', updateHeaderState, { passive: true });
 window.addEventListener('hashchange', () => window.requestAnimationFrame(updateHeaderState));
 window.addEventListener('pageshow', () => window.requestAnimationFrame(updateHeaderState));
@@ -16,8 +15,8 @@ window.addEventListener('load', () => window.requestAnimationFrame(updateHeaderS
 updateHeaderState();
 
 const hero = $('.hero');
-const heroMedia = $('.hero-media', hero);
-const heroFadeTargets = $$('.hero-copy, .hero-pillars', hero);
+const heroMedia = hero ? $('.hero-media', hero) : null;
+const heroFadeTargets = hero ? $$('.hero-copy, .hero-pillars', hero) : [];
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let heroFrame = null;
 function updateHeroFade() {
@@ -33,13 +32,13 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 updateHeroFade();
 
-menuToggle.addEventListener('click', () => {
+menuToggle?.addEventListener('click', () => {
   const open = mainNav.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', String(open));
   menuToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 });
 
-const submenuGroups = $$('.nav-group', mainNav);
+const submenuGroups = mainNav ? $$('.nav-group', mainNav) : [];
 const closeSubmenus = (except = null) => {
   submenuGroups.forEach(group => {
     if (group === except) return;
@@ -60,15 +59,15 @@ submenuGroups.forEach(group => {
 });
 
 document.addEventListener('click', event => {
-  if (!mainNav.contains(event.target)) closeSubmenus();
+  if (mainNav && !mainNav.contains(event.target)) closeSubmenus();
 });
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     closeSubmenus();
-    mainNav.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    menuToggle.focus();
+    mainNav?.classList.remove('open');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    menuToggle?.focus();
   }
 });
 
@@ -112,9 +111,10 @@ if (timeline) {
   timelineObserver.observe(timeline);
 }
 
-document.querySelector('#year').textContent = new Date().getFullYear();
+const year = document.querySelector('#year');
+if (year) year.textContent = new Date().getFullYear();
 
-form.addEventListener('submit', e => {
+form?.addEventListener('submit', e => {
   e.preventDefault();
   status.textContent = '';
   status.className = 'form-status';
@@ -153,7 +153,7 @@ const t = {
     'resolve.eyebrow':'PRIMERO, TU RETO','resolve.title':'¿Qué necesita resolver tu empresa?','resolve.body':'Identifica la situación que más se parece a tu realidad. Desde ahí te llevamos a la solución adecuada.',
     'resolve.card1.title':'El banco no autoriza tu crédito','resolve.card1.body':'Revisamos estructura, capacidad y alternativas de financiamiento.','resolve.card2.title':'Tu deuda de corto plazo presiona el flujo','resolve.card2.body':'Analizamos consolidación y reestructuración de pasivos.','resolve.card3.title':'Necesitas capital de trabajo','resolve.card3.body':'Diseñamos estructura para fortalecer liquidez operativa.','resolve.card4.title':'El tipo de cambio afecta tus márgenes','resolve.card4.body':'Evaluamos coberturas para reducir exposición cambiaria.','resolve.card5.title':'Necesitas mayor control financiero','resolve.card5.body':'Integramos finanzas, fiscal, contabilidad, auditoría y control.',
     'solutions.title':'Tres rutas. Una estrategia financiera integral.','solutions.body':'Profundiza en el eje que tu empresa necesita sin perder la visión completa del negocio.','solutions.s1.title':'Liquidez & Financiamiento','solutions.s1.body':'Capital de trabajo, pasivos, crédito empresarial, liquidez y líneas FX & Capital.','solutions.s2.title':'Gestión Estratégica de Riesgos','solutions.s2.body':'Divisas, forwards, opciones, derivados y estructuras avanzadas ante la volatilidad.','solutions.s3.title':'Consultoría Empresarial Integral','solutions.s3.body':'Finanzas, contabilidad, fiscal, auditoría, gobierno corporativo y control interno.','common.more':'Ver más →',
-    'hub.title':'Tu HUB de ingeniería financiera','hub.lead':'Financiamiento + Tesorería + Riesgos + Consultoría integrados en una sola estrategia.','hub.body':'No vendemos productos. Diseñamos estructuras financieras y acompañamos su ejecución.','hub.cta':'Conoce cómo trabajamos','hub.step1':'Analizamos','hub.step1body':'Balance, flujo, deuda y exposición.','hub.step2':'Estructuramos','hub.step2body':'La estructura financiera adecuada.','hub.step3':'Negociamos','hub.step3body':'Con instituciones y aliados especializados.','hub.step4':'Implementamos','hub.step4body':'Con seguimiento y ajustes continuos.',
+    'hub.title':'Tu aliado de ingeniería financiera','hub.lead':'Financiamiento + Tesorería + Riesgos + Consultoría integrados en una sola estrategia.','hub.body':'No vendemos productos. Diseñamos estructuras financieras y acompañamos su ejecución.','hub.cta':'Conoce cómo trabajamos','hub.step1':'Analizamos','hub.step1body':'Balance, flujo, deuda y exposición.','hub.step2':'Estructuramos','hub.step2body':'La estructura financiera adecuada.','hub.step3':'Negociamos','hub.step3body':'Con instituciones y aliados especializados.','hub.step4':'Implementamos','hub.step4body':'Con seguimiento y ajustes continuos.',
     'about.eyebrow':'QUIÉNES SOMOS','about.title':'Criterio financiero para transformar riesgos en oportunidades.','about.body':'Virtus Advisory Partners integra experiencia en financiamiento, tesorería, riesgos y consultoría para diseñar y ejecutar soluciones con visión de largo plazo.','about.mission':'Misión','about.missionBody':'Diseñar soluciones financieras estratégicas que protejan la operación, fortalezcan la liquidez y habiliten el crecimiento de nuestros clientes.','about.vision':'Visión','about.visionBody':'Ser el HUB de ingeniería financiera de referencia para empresas que buscan decisiones sólidas, acompañamiento experto y resultados sostenibles.','about.valuesEyebrow':'NUESTROS VALORES','about.valuesTitle':'Cuatro pilares que orientan cada decisión.','about.v1':'Templanza','about.v1Body':'Equilibrio y serenidad para decidir con claridad.','about.v2':'Fortaleza','about.v2Body':'Determinación para ejecutar incluso en escenarios complejos.','about.v3':'Prudencia y sabiduría','about.v3Body':'Análisis riguroso antes de recomendar y actuar.','about.v4':'Justicia','about.v4Body':'Integridad, transparencia y equilibrio en cada relación.',
     'financing.title':'Capital inteligente para impulsar tu operación.','financing.i1':'Crédito empresarial','financing.i2':'Capital de trabajo','financing.i3':'Consolidación de pasivos','financing.i4':'Reestructuración','financing.i5':'Financiamiento operativo','financing.i6':'Líneas FX & Capital',
     'risk.title':'Blindamos tu empresa ante la volatilidad.','risk.i1':'Mercado de divisas','risk.i2':'Forwards y opciones','risk.i3':'Derivados financieros','risk.i4':'Estructuras avanzadas',
@@ -199,4 +199,4 @@ function setLanguage(lang){
   langToggle.textContent = lang === 'es' ? 'EN' : 'ES';
   menuToggle.setAttribute('aria-label', lang === 'es' ? 'Abrir menú' : 'Open menu');
 }
-langToggle.addEventListener('click', () => setLanguage(currentLang === 'es' ? 'en' : 'es'));
+langToggle?.addEventListener('click', () => setLanguage(currentLang === 'es' ? 'en' : 'es'));
