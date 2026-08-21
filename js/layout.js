@@ -18,7 +18,7 @@ const siteHeader = `
         <div class="nav-group">
           <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="aboutMenu"><span data-i18n="nav.about">Quiénes somos</span><span class="nav-chevron" aria-hidden="true"></span></button>
           <div class="submenu" id="aboutMenu">
-            <a href="quienes-somos.html" data-i18n="nav.aboutOverview">Quiénes somos</a>
+            <a href="quienes-somos.html#quienes" data-i18n="nav.aboutOverview">Quiénes somos</a>
             <a href="quienes-somos.html#mision" data-i18n="nav.mission">Misión</a>
             <a href="quienes-somos.html#vision" data-i18n="nav.vision">Visión</a>
             <a href="quienes-somos.html#valores" data-i18n="nav.values">Nuestros valores</a>
@@ -27,7 +27,11 @@ const siteHeader = `
         <a href="por-que-virtus.html" data-i18n="nav.why">Por qué Virtus</a>
         <a href="metodologia.html" data-i18n="nav.method">Metodología</a>
         <a class="nav-cta" href="diagnostico.html" data-i18n="nav.diagnosis">Solicitar diagnóstico</a>
-        <button class="lang-toggle" id="langToggle" type="button" aria-label="Cambiar idioma">EN</button>
+        <div class="language-switcher" role="group" aria-label="Selector de idioma">
+          <button class="lang-option is-active" type="button" data-lang="es" aria-pressed="true">ES</button>
+          <span class="lang-separator" aria-hidden="true">/</span>
+          <button class="lang-option" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
       </nav>
     </div>
   </header>`;
@@ -36,7 +40,14 @@ const siteFooter = `
   <footer class="site-footer">
     <div class="container footer-grid">
       <a class="brand footer-brand" href="index.html"><img class="brand-logo" src="images/LOGO.svg" alt="Virtus Advisory Partners"></a>
-      <p>© <span id="year"></span> Virtus Advisory Partners</p>
+      <div class="footer-meta">
+        <p>© <span id="year"></span> Virtus Advisory Partners</p>
+        <nav class="social-links" aria-label="Redes sociales">
+          <a href="https://www.linkedin.com/company/virtusadp" target="_blank" rel="noopener noreferrer" aria-label="Virtus en LinkedIn"><img src="images/icons/SVG/social_linkedin.svg" alt="" aria-hidden="true"></a>
+          <a href="https://www.instagram.com/virtusadp" target="_blank" rel="noopener noreferrer" aria-label="Virtus en Instagram"><img src="images/icons/SVG/social_instagram.svg" alt="" aria-hidden="true"></a>
+          <a href="https://www.facebook.com/virtusadp" target="_blank" rel="noopener noreferrer" aria-label="Virtus en Facebook"><img src="images/icons/SVG/social_facebook.svg" alt="" aria-hidden="true"></a>
+        </nav>
+      </div>
     </div>
   </footer>`;
 

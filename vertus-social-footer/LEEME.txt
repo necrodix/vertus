@@ -1,0 +1,12 @@
+PAQUETE DE FOOTER SOCIAL — VIRTUS
+
+Copiar el contenido de esta carpeta sobre la raíz del proyecto vertus,
+conservando la estructura de carpetas.
+
+Perfiles generados con el identificador solicitado "virtusadp":
+- LinkedIn: https://www.linkedin.com/company/virtusadp
+- Instagram: https://www.instagram.com/virtusadp
+- Facebook: https://www.facebook.com/virtusadp
+
+Los enlaces abren en una pestaña nueva e incluyen etiquetas accesibles.
+Los SVG usan el dorado institucional y están guardados en images/icons/SVG.
